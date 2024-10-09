@@ -1,0 +1,38 @@
+body {
+    background: coral; 
+}
+
+@media screen and (max-width: 1000px){
+    body {
+        background: blue;
+    }
+}
+
+/*transform: translate(-200px, -250px);*/
+/*transform: rotate(70deg);*/
+/*transform: scale(2, 0.5);*/
+/*transform: skew(50deg);*/
+
+/*transition-property: all;
+transition-duration: 1s;
+transition-timing-function: linear;*/
+
+/* animation-name: animation;
+animation-duration: 4s;
+animation-iteration-count: infinite;
+animation-timing-function: ease-in; */
+
+/*
+@keyframes animation {
+    0% {
+        transform: scale(3);
+    }
+    25% {
+        transform: skew(40deg);
+    }
+    50% {
+        background-color: blue;
+        transform: skew(0deg);
+    }
+}
+*/
