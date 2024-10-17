@@ -1,29 +1,54 @@
 import {Note} from './Note.js'
+import { useState } from 'react'
 
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    important: true
+const App = (props) => {
+
+  const [notes, setNotes] = useState(props.notes)
+
+  const [newNote, setNewNote] = useState("")
+
+  const [showAll, setShowAll] = useState(true)
+
+  const handleShowAll = () => {
+    setShowAll(() => !showAll)
   }
-]
 
-export default function App () {
-  return ( 
-        <ul>
-          {notes.map((note) => (
-          <Note key={note.id} {...note}/>
-          ))}
-        </ul>
-      )
+  const handleChange = (event) => {
+    setNewNote(event.target.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const noteToAddToState = {
+      id: notes.length + 1,
+      content: newNote,
+      important: Math.random() < 0.5
+    }
+    setNotes([...notes, noteToAddToState])
+    setNewNote("")
+  }
+  return (
+    <div>
+      <h1>Notes</h1>
+      <button onClick={handleShowAll}>{ showAll ? 'Show only important' : 'Show All'}</button>
+      <ul>
+        
+        {notes
+        .filter(note => 
+        {if (showAll === true) 
+          return true
+        return note.important === true
+        })
+        .map(note => 
+          <Note key={note.id} {...note} />
+        )}
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="Add note" onChange={handleChange} value={newNote}></input>
+          <button>Create Note</button>
+        </form>
+      </ul>
+    </div>
+  )
 }
+
+export default App 
